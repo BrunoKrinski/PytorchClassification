@@ -197,7 +197,7 @@ def main():
                        args.output_dir,
                        epochs=args.epochs)
 
-    torch.save(history, f"{args.output}/{args.model}_history.pt")
+    torch.save(history, f"{args.output_dir}/{args.model}_history.pt")
 
 if __name__ == '__main__':
     main()
