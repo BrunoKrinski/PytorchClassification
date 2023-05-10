@@ -1,4 +1,5 @@
 import torch.nn as nn
+from torchsummary import summary
 from torchvision.models import vgg16, VGG16_Weights
 from torchvision.models import vgg16_bn, VGG16_BN_Weights
 from torchvision.models import resnet50, ResNet50_Weights
@@ -8,6 +9,7 @@ def get_model(name, num_classes):
     
     if name == 'vgg16':
         model = vgg16(weights=VGG16_Weights.IMAGENET1K_V1)
+        #summary(model, input_size=(3, 224, 224), batch_size=1, device='cpu')
         
         fc_inputs = model.classifier[6].in_features
         model.classifier[6] = nn.Linear(fc_inputs, num_classes)

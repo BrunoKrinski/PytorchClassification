@@ -173,12 +173,12 @@ def main():
     valid_data_loader = DataLoader(data['valid'], batch_size=bs, shuffle=True)
     test_data_loader = DataLoader(data['test'], batch_size=bs, shuffle=True)
 
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "gpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     print(train_data_size, valid_data_size, test_data_size)
-
+    
     model = get_model(args.model, num_classes=num_classes)
-    print(model)
+    #summary(model, input_size=(3, 224, 224), batch_size=1, device='cpu')
     
     model = model.to(device)
 

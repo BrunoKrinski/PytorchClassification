@@ -10,7 +10,6 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from tqdm import tqdm
 from models import get_model
-from torchsummary import summary
 from torch.utils.data import DataLoader
 from torchvision import datasets, models, transforms
 
