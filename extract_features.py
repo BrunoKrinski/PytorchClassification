@@ -18,6 +18,7 @@ from torchvision import datasets, models, transforms
 
 from torchvision.models import vgg16, VGG16_Weights
 from torchvision.models import resnet18, ResNet18_Weights
+from torchvision.models import resnet50, ResNet50_Weights
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -40,22 +41,23 @@ def predict(model_path, test_image_name, size = 224):
        
     transform = image_transforms['test']
 
-    test_image = Image.open(test_image_name)
+    test_image = Image.open(test_image_name).convert("RGB")
         
     test_image_tensor = transform(test_image)
         
     #model = vgg16(weights=VGG16_Weights.IMAGENET1K_V1)
+    model = resnet50(weights=ResNet50_Weights.IMAGENET1K_V1)
     #summary(model, input_size=(3, 224, 224), batch_size=1, device='cpu')
     #print(model)
     
-    device = torch.device('cpu')
-    model = torch.load(model_path, map_location=device)
+    #device = torch.device('cpu')
+    #model = torch.load(model_path, map_location=device)
     #print(model)
     #summary(model, input_size=(3, 224, 224), batch_size=1, device='cpu')
     
     layer = model._modules.get('avgpool')
     
-    my_embedding = torch.zeros(512 * 49)
+    my_embedding = torch.zeros(2048)
     
     def copy_data(m, i, o):
         my_embedding.copy_(o.flatten()) 
